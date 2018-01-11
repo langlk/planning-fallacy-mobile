@@ -1,5 +1,8 @@
 import React from 'react';
-import { AsyncStorage, Text } from 'react-native';
+import { AsyncStorage, View, Text } from 'react-native';
+
+import Authorization from './Authorization.js';
+import { IP_ADDRESS } from './secrets.js';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,14 +16,12 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.user) {
-      console.log('have_user!');
-      console.log(this.state.user);
       return(
         <Text>We have a user!</Text>
       );
     } else {
       return(
-        <Text>We don't have a user!</Text>
+        <Authorization />
       );
     }
   }
@@ -31,7 +32,7 @@ export default class App extends React.Component {
       if (tokenValue !== null){
         this.getUser(tokenValue);
       } else {
-        console.log('No token stored.')
+        console.log('No token stored.');
       }
     } catch (error) {
       console.error('Could not access storage.');
@@ -39,9 +40,8 @@ export default class App extends React.Component {
   }
 
   async getUser(token) {
-    token = 'zjJEsb56Mn5YfPMAFw8CkHtq';
     try {
-      let response = await fetch('http://<ip_address>:3000/api/v1/user', {
+      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/user`, {
         method: 'GET',
         headers: {
           Authorization: `Token ${token}`,
