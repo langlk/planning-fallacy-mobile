@@ -63,6 +63,7 @@ export default class App extends React.Component {
       });
       let responseJson = await response.json();
       this.setState({ user: responseJson });
+      console.log(responseJson);
     } catch (error) {
       console.error(error);
     }

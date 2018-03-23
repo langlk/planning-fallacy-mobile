@@ -3,20 +3,24 @@ import { View, Text, TouchableHighlight } from 'react-native';
 
 import styles from '../styles.js';
 import LinkAccount from './LinkAccount.js';
+import Dashboard from './Dashboard.js';
 
 export default class LoggedIn extends React.Component {
+
   render() {
     let content = null;
 
-    if (!this.props.user.hasAccount) {
+    if (!this.props.user.has_account) {
       content = (
         <LinkAccount
           token={this.props.token}
-          onAccountLink={this.props.onAccountLink()}
         />
       );
     } else {
-      content = <Text>Welcome, {this.props.user.name}</Text>
+      content = <Dashboard
+        user={this.props.user}
+        token={this.props.token}
+      />;
     }
 
     return (
