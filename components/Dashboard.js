@@ -44,7 +44,7 @@ export default class Dashboard extends React.Component {
     const pages = {
       'checkin': <CheckIn events={this.state.events} token={this.props.token} />,
       'events': <Events events={this.state.events} />,
-      'profile': <Profile user={this.state.user} />
+      'profile': <Profile user={this.props.user} />
     };
     return (
       <View>
