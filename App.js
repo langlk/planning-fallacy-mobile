@@ -8,7 +8,13 @@ import LoggedIn from './components/LoggedIn.js';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { user: null };
+    this.state = {
+      user: null,
+      token: null
+    };
+
+    this.signOut = this.signOut.bind(this);
+    this.setToken = this.setToken.bind(this);
   }
 
   componentDidMount() {
@@ -20,6 +26,7 @@ export default class App extends React.Component {
       return(
         <LoggedIn
           user={this.state.user}
+          onSignOut={this.signOut}
         />
       );
     } else {
@@ -35,12 +42,13 @@ export default class App extends React.Component {
     try {
       let tokenValue = await AsyncStorage.getItem('userToken');
       if (tokenValue !== null){
+        this.setState({ token: tokenValue });
         this.getUser(tokenValue);
       } else {
         console.log('No token stored.');
       }
     } catch (error) {
-      console.error('Could not access storage.');
+      console.error(error);
     }
   }
 
@@ -49,9 +57,7 @@ export default class App extends React.Component {
       let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/user`, {
         method: 'GET',
         headers: {
-          Authorization: `Token ${token}`,
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          Authorization: `Token ${token}`
         },
       });
       let responseJson = await response.json();
@@ -66,7 +72,37 @@ export default class App extends React.Component {
       await AsyncStorage.setItem('userToken', token);
       this.getUser(token);
     } catch (error) {
-      console.error('Could not access storage.');
+      console.error(error);
+    }
+  }
+
+  signOut() {
+    this.clearSession(this.state.token);
+    this.clearToken();
+    this.setState({
+      user: null,
+      token: null
+    });
+  }
+
+  async clearSession(token) {
+    try {
+      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signout`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Token ${token}`
+        },
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async clearToken() {
+    try {
+      await AsyncStorage.setItem('userToken', null);
+    } catch (error) {
+      console.error(error);
     }
   }
 }

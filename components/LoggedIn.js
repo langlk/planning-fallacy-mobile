@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 
 export default class LoggedIn extends React.Component {
 
@@ -7,6 +7,11 @@ export default class LoggedIn extends React.Component {
     return (
       <View>
         <Text>{this.props.user.name} is Logged In!</Text>
+        <TouchableHighlight
+          onPress={ () => this.props.onSignOut() }
+          >
+          <Text>Sign Out</Text>
+        </TouchableHighlight>
       </View>
     );
   }
