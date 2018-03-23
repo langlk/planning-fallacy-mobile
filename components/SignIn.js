@@ -1,17 +1,13 @@
 import React from 'react';
 import { View, Text, TextInput, Button, AsyncStorage, StyleSheet } from 'react-native';
 
-export default class SignInScreen extends React.Component {
+export default class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: ""
     };
-  }
-
-  signInUser() {
-    console.log(this.state);
   }
 
   render() {
@@ -28,7 +24,7 @@ export default class SignInScreen extends React.Component {
           onChangeText={(password) => this.setState({password})}
         />
         <Button
-          onPress={() => this.signInUser() }
+          onPress={() => this.props.onSignIn(this.state.email, this.state.password) }
           title="Submit"
         />
       </View>

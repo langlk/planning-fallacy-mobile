@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, AsyncStorage, Button } from 'react-native';
 
-export default class SignUpScreen extends React.Component {
+export default class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,10 +10,6 @@ export default class SignUpScreen extends React.Component {
       password: "",
       passwordConfirmation: "",
     };
-  }
-
-  registerUser() {
-    console.log(this.state);
   }
 
   render() {
@@ -39,8 +35,8 @@ export default class SignUpScreen extends React.Component {
           onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
         />
         <Button
-          onPress={() => this.registerUser() }
           title="Submit"
+          onPress={() => this.props.onSignUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation) }
         />
       </View>
     );

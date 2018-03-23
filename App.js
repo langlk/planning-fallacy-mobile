@@ -1,8 +1,9 @@
 import React from 'react';
-import { AsyncStorage, View, Text } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
-import Authorization from './Authorization.js';
-import { IP_ADDRESS } from './secrets.js';
+import IP_ADDRESS from './secrets.js';
+import LoggedOut from './components/LoggedOut.js';
+import LoggedIn from './components/LoggedIn.js';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -17,11 +18,15 @@ export default class App extends React.Component {
   render() {
     if (this.state.user) {
       return(
-        <Text>We have a user!</Text>
+        <LoggedIn
+          user={this.state.user}
+        />
       );
     } else {
       return(
-        <Authorization />
+        <LoggedOut
+          onSignIn={this.setToken}
+        />
       );
     }
   }
@@ -53,6 +58,15 @@ export default class App extends React.Component {
       this.setState({ user: responseJson });
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async setToken(token) {
+    try {
+      await AsyncStorage.setItem('userToken', token);
+      this.getUser(token);
+    } catch (error) {
+      console.error('Could not access storage.');
     }
   }
 }
