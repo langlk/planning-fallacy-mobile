@@ -1,12 +1,27 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
-export default class LoggedIn extends React.Component {
+import styles from '../styles.js';
+import LinkAccount from './LinkAccount.js';
 
+export default class LoggedIn extends React.Component {
   render() {
+    let content = null;
+
+    if (!this.props.user.hasAccount) {
+      content = (
+        <LinkAccount
+          token={this.props.token}
+          onAccountLink={this.props.onAccountLink()}
+        />
+      );
+    } else {
+      content = <Text>Welcome, {this.props.user.name}</Text>
+    }
+
     return (
-      <View>
-        <Text>{this.props.user.name} is Logged In!</Text>
+      <View style={styles.mainContainer}>
+        {content}
         <TouchableHighlight
           onPress={ () => this.props.onSignOut() }
           >

@@ -26,6 +26,7 @@ export default class App extends React.Component {
       return(
         <LoggedIn
           user={this.state.user}
+          token={this.state.token}
           onSignOut={this.signOut}
         />
       );

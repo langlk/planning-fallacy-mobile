@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 
 import IP_ADDRESS from '../secrets.js';
 import SignIn from './SignIn.js';
@@ -10,8 +10,15 @@ export default class LoggedOut extends React.Component {
     super(props);
     this.state = { signInPage: true };
 
+    this.togglePress = this.togglePress.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
+  }
+
+  togglePress() {
+    this.setState((prevState, props) => {
+      return { signInPage: !prevState.signInPage };
+    });
   }
 
   async handleSignIn(email, password) {
@@ -48,6 +55,11 @@ export default class LoggedOut extends React.Component {
           <SignIn
             onSignIn={this.handleSignIn}
           />
+          <TouchableHighlight
+            onPress={() => this.togglePress()}
+            >
+            <Text>Sign Up</Text>
+          </TouchableHighlight>
         </View>
       );
     } else {
@@ -56,6 +68,12 @@ export default class LoggedOut extends React.Component {
           <SignUp
             onSignUp={this.handleSignUp}
           />
+
+          <TouchableHighlight
+              onPress={() => this.togglePress()}
+            >
+            <Text>Sign In</Text>
+          </TouchableHighlight>
         </View>
       );
     }
