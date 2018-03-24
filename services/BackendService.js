@@ -19,6 +19,18 @@ export default class BackendService {
     }
   }
 
+  static async clearSession(token) {
+    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signout`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Token ${token}`
+      },
+    });
+    if (response.status !== 200) {
+      this.throwException(response.status, responseJson);
+    }
+  }
+
   static throwException(status, responseJson) {
     let message = `API Error Code: ${status}`;
     responseJson.errors.forEach((error) => {

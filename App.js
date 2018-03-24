@@ -83,14 +83,9 @@ export default class App extends React.Component {
 
   async clearSession(token) {
     try {
-      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signout`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Token ${token}`
-        },
-      });
+      let response = await BackendService.clearSession(token);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
