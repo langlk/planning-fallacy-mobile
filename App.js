@@ -2,6 +2,7 @@ import React from 'react';
 import { AsyncStorage } from 'react-native';
 
 import IP_ADDRESS from './secrets.js';
+import BackendService from './services/BackendService.js'
 import LoggedOut from './components/LoggedOut.js';
 import LoggedIn from './components/LoggedIn.js';
 
@@ -55,17 +56,10 @@ export default class App extends React.Component {
 
   async getUser(token) {
     try {
-      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/user`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Token ${token}`
-        },
-      });
-      let responseJson = await response.json();
-      this.setState({ user: responseJson });
-      console.log(responseJson);
+      let userResponse = await BackendService.getUser(token);
+      this.setState({ user: userResponse });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
