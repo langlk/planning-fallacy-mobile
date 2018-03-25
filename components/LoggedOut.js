@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
 import BackendService from '../services/BackendService.js';
+import StorageService from '../services/StorageService.js';
 import SignIn from './SignIn.js';
 import SignUp from './SignUp.js';
 
@@ -11,8 +12,8 @@ export default class LoggedOut extends React.Component {
     this.state = { signInPage: true };
 
     this.togglePress = this.togglePress.bind(this);
-    this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   togglePress() {
@@ -21,52 +22,47 @@ export default class LoggedOut extends React.Component {
     });
   }
 
-  async handleSignIn(email, password) {
+  async signIn(email, password) {
     try {
       let response = await BackendService.signIn(email, password);
-      this.props.onSignIn(response);
+      await StorageService.setUser(response);
+      this.props.navigation.navigate('App', { user: response });
     } catch (error) {
       console.log(error);
     }
   }
 
-  async handleSignUp(name, email, password, passwordConfirmation) {
+  async signUp(name, email, password, passwordConfirmation) {
     try {
       let response = await BackendService.signUp(name, email, password, passwordConfirmation);
-      this.props.onSignIn(response);
+      await StorageService.setUser(response);
+      this.props.navigation.navigate('App', { user: response });
     } catch (error) {
       console.log(error);
     }
   }
 
   render() {
-    if (this.state.signInPage) {
-      return (
-        <View>
-          <SignIn
-            onSignIn={this.handleSignIn}
-          />
-          <TouchableHighlight
-            onPress={() => this.togglePress()}
-            >
-            <Text>Sign Up</Text>
-          </TouchableHighlight>
-        </View>
-      );
-    } else {
-      return (
-        <View>
-          <SignUp
-            onSignUp={this.handleSignUp}
-          />
-
-          <TouchableHighlight
-              onPress={() => this.togglePress()}
-            >
-            <Text>Sign In</Text>
-          </TouchableHighlight>
-        </View>
-      );
-    }
+    let text = this.state.signInPage ? 'Sign Up' : 'Sign In';
+    let page = this.state.signInPage ? (
+      <SignIn
+        onSignIn={this.signIn}
+      />
+    ) : (
+      <SignUp
+        onSignUp={this.signUp}
+      />
+    );
+    
+    return (
+      <View>
+        {page}
+        <TouchableHighlight
+          onPress={() => this.togglePress()}
+          >
+          <Text>{text}</Text>
+        </TouchableHighlight>
+      </View>
+    );
   }
 }
