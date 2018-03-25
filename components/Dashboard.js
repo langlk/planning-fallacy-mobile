@@ -18,15 +18,20 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.getEvents();
+    this.getEvents(this.props.token);
   }
 
-  async getEvents() {
+  componentWillReceiveProps(nextProps) {
+    this.getEvents(nextProps);
+  }
+
+  async getEvents(token) {
+    console.log("token is", token);
     try {
       let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/events`, {
         method: 'GET',
         headers: {
-          Authorization: `Token ${this.props.token}`
+          Authorization: `Token ${token}`
         },
       });
       let responseJson = await response.json();

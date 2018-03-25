@@ -1,8 +1,8 @@
 import React from 'react';
 import { AsyncStorage } from 'react-native';
 
-import IP_ADDRESS from './secrets.js';
-import BackendService from './services/BackendService.js'
+import BackendService from './services/BackendService.js';
+import StorageService from './services/StorageService.js';
 import LoggedOut from './components/LoggedOut.js';
 import LoggedIn from './components/LoggedIn.js';
 
@@ -42,7 +42,7 @@ export default class App extends React.Component {
 
   async getToken() {
     try {
-      let tokenValue = await AsyncStorage.getItem('userToken');
+      let tokenValue = await StorageService.getToken();
       if (tokenValue !== null){
         this.setState({ token: tokenValue });
         this.getUser(tokenValue);
@@ -65,7 +65,8 @@ export default class App extends React.Component {
 
   async setToken(token) {
     try {
-      await AsyncStorage.setItem('userToken', token);
+      await StorageService.setToken(token);
+      this.setState({ token: token });
       this.getUser(token);
     } catch (error) {
       console.error(error);
@@ -91,9 +92,9 @@ export default class App extends React.Component {
 
   async clearToken() {
     try {
-      await AsyncStorage.setItem('userToken', null);
+      await StorageService.clearToken();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 }

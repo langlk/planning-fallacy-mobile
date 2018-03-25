@@ -32,7 +32,7 @@ export default class LoggedOut extends React.Component {
       console.log(responseJson);
       this.props.onSignIn(responseJson.token);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
