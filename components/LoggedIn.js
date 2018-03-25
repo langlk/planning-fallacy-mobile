@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
-import styles from '../styles.js';
 import LinkAccount from './LinkAccount.js';
 import Dashboard from './Dashboard.js';
 
