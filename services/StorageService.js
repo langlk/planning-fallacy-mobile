@@ -3,21 +3,25 @@ import { AsyncStorage } from 'react-native';
 
 const ASYNC_PREFIX = '@planningFallacy';
 const KEYS = {
-  token: `${ASYNC_PREFIX}:userToken`
+  user: `${ASYNC_PREFIX}:userData`
 };
 
 export default class StorageService {
 
-  static async getToken() {
-    let tokenValue = await AsyncStorage.getItem(KEYS.token);
-    return tokenValue;
+  static async getUser() {
+    let userData = await AsyncStorage.getItem(KEYS.user);
+    let user = JSON.parse(userData);
+    console.log(user);
+    return user;
   }
 
-  static async setToken(tokenValue) {
-    await AsyncStorage.setItem(KEYS.token, tokenValue);
+  static async setUser(user) {
+    let userData = JSON.stringify(user);
+    console.log(userData);
+    await AsyncStorage.setItem(KEYS.user, userData);
   }
 
-  static async clearToken() {
-    await AsyncStorage.setItem(KEYS.token, null);
+  static async clearUser() {
+    await AsyncStorage.setItem(KEYS.user, null);
   }
 }

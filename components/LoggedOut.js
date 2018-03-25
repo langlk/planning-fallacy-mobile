@@ -26,11 +26,10 @@ export default class LoggedOut extends React.Component {
       let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signin?email=${email}&password=${password}`, {
         method: 'POST'
       });
-      console.log(IP_ADDRESS);
       let responseJson = await response.json();
       console.log("RESPONSE RECEIVED");
       console.log(responseJson);
-      this.props.onSignIn(responseJson.token);
+      this.props.onSignIn(responseJson);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +41,7 @@ export default class LoggedOut extends React.Component {
         method: 'POST'
       });
       let responseJson = await response.json();
-      this.props.onSignIn(responseJson.token);
+      this.props.onSignIn(responseJson);
     } catch (error) {
       console.error(error);
     }

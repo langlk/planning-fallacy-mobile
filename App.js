@@ -10,12 +10,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
-      token: null
+      user: null
     };
 
     this.signOut = this.signOut.bind(this);
-    this.setToken = this.setToken.bind(this);
+    this.signIn = this.signIn.bind(this);
   }
 
   componentDidMount() {
@@ -27,14 +26,14 @@ export default class App extends React.Component {
       return(
         <LoggedIn
           user={this.state.user}
-          token={this.state.token}
+          token={this.state.user.token}
           onSignOut={this.signOut}
         />
       );
     } else {
       return(
         <LoggedOut
-          onSignIn={this.setToken}
+          onSignIn={this.signIn}
         />
       );
     }
@@ -42,19 +41,19 @@ export default class App extends React.Component {
 
   async getToken() {
     try {
-      let tokenValue = await StorageService.getToken();
-      if (tokenValue !== null){
-        this.setState({ token: tokenValue });
-        this.getUser(tokenValue);
+      let userData = await StorageService.getUser();
+      if (userData !== null){
+        this.setState({ user: userData });
+        this.updateUser(userData.token);
       } else {
-        console.log('No token stored.');
+        console.log('No user data stored.');
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
-  async getUser(token) {
+  async updateUser(token) {
     try {
       let userResponse = await BackendService.getUser(token);
       this.setState({ user: userResponse });
@@ -63,22 +62,20 @@ export default class App extends React.Component {
     }
   }
 
-  async setToken(token) {
+  async signIn(userData) {
     try {
-      await StorageService.setToken(token);
-      this.setState({ token: token });
-      this.getUser(token);
+      await StorageService.setUser(userData);
+      this.setState({ user: userData });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
   signOut() {
     this.clearSession(this.state.token);
-    this.clearToken();
+    this.clearUser();
     this.setState({
-      user: null,
-      token: null
+      user: null
     });
   }
 
