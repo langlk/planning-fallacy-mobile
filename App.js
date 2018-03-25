@@ -87,9 +87,9 @@ export default class App extends React.Component {
     }
   }
 
-  async clearToken() {
+  async clearUser() {
     try {
-      await StorageService.clearToken();
+      await StorageService.clearUser();
     } catch (error) {
       console.log(error);
     }

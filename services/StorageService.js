@@ -11,17 +11,15 @@ export default class StorageService {
   static async getUser() {
     let userData = await AsyncStorage.getItem(KEYS.user);
     let user = JSON.parse(userData);
-    console.log(user);
     return user;
   }
 
   static async setUser(user) {
     let userData = JSON.stringify(user);
-    console.log(userData);
     await AsyncStorage.setItem(KEYS.user, userData);
   }
 
   static async clearUser() {
-    await AsyncStorage.setItem(KEYS.user, null);
+    await AsyncStorage.removeItem(KEYS.user);
   }
 }

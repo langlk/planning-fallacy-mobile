@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
 import IP_ADDRESS from '../secrets.js';
+import BackendService from '../services/BackendService.js';
 import SignIn from './SignIn.js';
 import SignUp from './SignUp.js';
 
@@ -23,13 +24,8 @@ export default class LoggedOut extends React.Component {
 
   async handleSignIn(email, password) {
     try {
-      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signin?email=${email}&password=${password}`, {
-        method: 'POST'
-      });
-      let responseJson = await response.json();
-      console.log("RESPONSE RECEIVED");
-      console.log(responseJson);
-      this.props.onSignIn(responseJson);
+      let response = await BackendService.signIn(email, password);
+      this.props.onSignIn(response);
     } catch (error) {
       console.log(error);
     }
@@ -37,13 +33,10 @@ export default class LoggedOut extends React.Component {
 
   async handleSignUp(name, email, password, passwordConfirmation) {
     try {
-      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signup?name=${name}&email=${email}&password=${password}&password_confirmation=${passwordConfirmation}`, {
-        method: 'POST'
-      });
-      let responseJson = await response.json();
-      this.props.onSignIn(responseJson);
+      let response = await BackendService.signUp(name, email, password, passwordConfirmation);
+      this.props.onSignIn(response);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
