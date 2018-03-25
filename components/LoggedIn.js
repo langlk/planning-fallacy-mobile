@@ -3,6 +3,7 @@ import { View, Text, TouchableHighlight } from 'react-native';
 
 import LinkAccount from './LinkAccount.js';
 import Dashboard from './Dashboard.js';
+import styles from '../styles/styles.js';
 
 export default class LoggedIn extends React.Component {
 
