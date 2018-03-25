@@ -58,6 +58,19 @@ export default class BackendService {
     }
   }
 
+  static async checkIn(token, eventId) {
+    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/checkins?event_id=${eventId}`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${token}`
+      },
+    });
+    if (response.status !== 200) {
+      let responseJson = await response.json();
+      this.throwException(status, responseJson);
+    }
+  }
+
   static async clearSession(token) {
     let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signout`, {
       method: 'DELETE',
@@ -65,8 +78,8 @@ export default class BackendService {
         Authorization: `Token ${token}`
       },
     });
-    let responseJson = await response.json();
     if (response.status !== 200) {
+      let responseJson = await response.json();
       this.throwException(response.status, responseJson);
     }
   }

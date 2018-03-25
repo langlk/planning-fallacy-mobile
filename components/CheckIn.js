@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import IP_ADDRESS from '../secrets.js'
+import BackendService from '../services/BackendService.js';
 import CheckInForm from './CheckInForm.js';
 
 export default class CheckIn extends React.Component {
@@ -12,14 +12,9 @@ export default class CheckIn extends React.Component {
 
   async checkIn(eventId) {
     try {
-      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/checkins?event_id=${eventId}`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Token ${this.props.token}`
-        },
-      });
+      let response = await BackendService.checkIn(this.props.token, eventId);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
