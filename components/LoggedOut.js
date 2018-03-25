@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableHighlight } from 'react-native';
 
-import IP_ADDRESS from '../secrets.js';
 import BackendService from '../services/BackendService.js';
 import SignIn from './SignIn.js';
 import SignUp from './SignUp.js';

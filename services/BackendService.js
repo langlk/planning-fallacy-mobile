@@ -43,6 +43,21 @@ export default class BackendService {
     }
   }
 
+  static async getEvents(token) {
+    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/events`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Token ${token}`
+      },
+    });
+    let responseJson = await response.json();
+    if (response.status === 200) {
+      return responseJson;
+    } else {
+      this.throwException(response.status, responseJson);
+    }
+  }
+
   static async clearSession(token) {
     let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signout`, {
       method: 'DELETE',

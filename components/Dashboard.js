@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import IP_ADDRESS from '../secrets.js'
+import IP_ADDRESS from '../secrets.js';
+import BackendService from '../services/BackendService.js';
 import CheckIn from './CheckIn.js';
 import Events from './Events.js';
 import Profile from './Profile.js';
@@ -26,18 +27,11 @@ export default class Dashboard extends React.Component {
   }
 
   async getEvents(token) {
-    console.log("token is", token);
     try {
-      let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/events`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Token ${token}`
-        },
-      });
-      let responseJson = await response.json();
-      this.setState({ events: responseJson.events });
+      let response = await BackendService.getEvents(token);
+      this.setState({ events: response.events });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
