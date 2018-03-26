@@ -1,7 +1,14 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
+import BackendService from '../services/BackendService.js';
+import StorageService from '../services/StorageService.js';
+
 export default class SignUp extends React.Component {
+  static navigationOptions =  {
+    title: 'Sign Up'
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +17,18 @@ export default class SignUp extends React.Component {
       password: "",
       passwordConfirmation: "",
     };
+
+    this.signUp = this.signUp.bind(this);
+  }
+
+  async signUp(name, email, password, passwordConfirmation) {
+    try {
+      let response = await BackendService.signUp(name, email, password, passwordConfirmation);
+      await StorageService.setUser(response);
+      this.props.navigation.navigate('App', { user: response });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
@@ -36,7 +55,7 @@ export default class SignUp extends React.Component {
         />
         <Button
           title="Submit"
-          onPress={() => this.props.onSignUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation) }
+          onPress={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation) }
         />
       </View>
     );

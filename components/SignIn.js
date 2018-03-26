@@ -1,13 +1,32 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 
+import BackendService from '../services/BackendService.js';
+import StorageService from '../services/StorageService.js';
+
 export default class SignIn extends React.Component {
+  static navigationOptions = {
+    title: 'Sign In'
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       email: "",
       password: ""
     };
+
+    this.signIn = this.signIn.bind(this);
+  }
+
+  async signIn(email, password) {
+    try {
+      let response = await BackendService.signIn(email, password);
+      await StorageService.setUser(response);
+      this.props.navigation.navigate('App', { user: response });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
@@ -24,7 +43,7 @@ export default class SignIn extends React.Component {
           onChangeText={(password) => this.setState({password})}
         />
         <Button
-          onPress={() => this.props.onSignIn(this.state.email, this.state.password) }
+          onPress={() => this.signIn(this.state.email, this.state.password) }
           title="Submit"
         />
       </View>
