@@ -4,14 +4,18 @@ import { View, Text, Linking } from 'react-native';
 import IP_ADDRESS from '../secrets.js';
 
 export default class LinkAccount extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Home'
+  };
 
   render() {
+    let user = this.props.navigation.state.params.user;
     return (
       <View>
         <Text>It looks like you have not linked your Google Calendar yet.</Text>
 
         <Text
-          onPress={() => Linking.openURL(`http://${IP_ADDRESS}:3000?token=${this.props.token}`)}
+          onPress={() => Linking.openURL(`http://${IP_ADDRESS}:3000?token=${user.token}`)}
           >
             Link Google Calendar
           </Text>

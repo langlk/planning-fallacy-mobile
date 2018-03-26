@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, AsyncStorage, StatusBar, View } from 'react-native';
+import { ActivityIndicator, StatusBar, View } from 'react-native';
 
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
@@ -22,7 +22,8 @@ export default class LoadingScreen extends React.Component {
         user = userUpdate;
         await StorageService.setUser(userUpdate);
       }
-      this.props.navigation.navigate('App', { user: user });
+      let routeName = user.has_account ? 'Dashboard' : 'LinkAccount';
+      this.props.navigation.navigate(routeName, { user: user });
     } else {
       // No saved user, go to login
       this.props.navigation.navigate('Auth');

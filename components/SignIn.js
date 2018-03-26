@@ -21,9 +21,10 @@ export default class SignIn extends React.Component {
 
   async signIn(email, password) {
     try {
-      let response = await BackendService.signIn(email, password);
-      await StorageService.setUser(response);
-      this.props.navigation.navigate('App', { user: response });
+      let user = await BackendService.signIn(email, password);
+      await StorageService.setUser(user);
+      let routeName = user.has_account ? 'Dashboard' : 'LinkAccount';
+      this.props.navigation.navigate(routeName, { user: user });
     } catch (error) {
       console.log(error);
     }

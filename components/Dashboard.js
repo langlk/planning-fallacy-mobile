@@ -11,6 +11,7 @@ export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: this.props.navigation.state.params.user,
       page: 'checkin',
       events: null
     };
@@ -19,11 +20,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.getEvents(this.props.token);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.getEvents(nextProps);
+    this.getEvents(this.state.user.token);
   }
 
   async getEvents(token) {
@@ -41,9 +38,9 @@ export default class Dashboard extends React.Component {
 
   render() {
     const pages = {
-      'checkin': <CheckIn events={this.state.events} token={this.props.token} />,
+      'checkin': <CheckIn events={this.state.events} token={this.state.user.token} />,
       'events': <Events events={this.state.events} />,
-      'profile': <Profile user={this.props.user} />
+      'profile': <Profile user={this.state.user} />
     };
     return (
       <View>
@@ -52,6 +49,7 @@ export default class Dashboard extends React.Component {
         <Text onPress={() => this.setPage('profile')}>Profile</Text>
 
         {pages[this.state.page]}
+        <Text onPress={() => this.props.navigation.navigate('SignOut')}>Sign Out</Text>
       </View>
     );
   }

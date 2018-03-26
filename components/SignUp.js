@@ -25,7 +25,7 @@ export default class SignUp extends React.Component {
     try {
       let response = await BackendService.signUp(name, email, password, passwordConfirmation);
       await StorageService.setUser(response);
-      this.props.navigation.navigate('App', { user: response });
+      this.props.navigation.navigate('LinkAccount', { user: response });
     } catch (error) {
       console.log(error);
     }
