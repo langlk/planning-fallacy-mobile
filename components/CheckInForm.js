@@ -26,6 +26,7 @@ export default class CheckInForm extends React.Component {
 
     return events ? (
       <View>
+        <Text>CheckIn</Text>
         <Picker
           selectedValue={this.state.eventId}
         >
@@ -36,6 +37,11 @@ export default class CheckInForm extends React.Component {
           title="Check In"
         />
       </View>
-    ) : <View><Text>No events to check into.</Text></View>;
+    ) : (
+      <View>
+        <Text>CheckIn</Text>
+        <Text>No events to check into.</Text>
+      </View>
+    );
   }
 }

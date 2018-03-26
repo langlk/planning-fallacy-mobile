@@ -1,5 +1,4 @@
 import React from 'react';
-import { View, Text } from 'react-native';
 
 import BackendService from '../services/BackendService.js';
 import CheckInForm from './CheckInForm.js';
@@ -20,12 +19,10 @@ export default class CheckIn extends React.Component {
 
   render() {
     return (
-      <View>
-        <CheckInForm
-          events={this.props.events}
-          onCheckIn={this.checkIn}
-        />
-      </View>
+      <CheckInForm
+        events={this.props.events}
+        onCheckIn={this.checkIn}
+      />
     );
   }
 }

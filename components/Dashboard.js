@@ -8,11 +8,14 @@ import Events from './Events.js';
 import Profile from './Profile.js';
 
 export default class Dashboard extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Home'
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       user: this.props.navigation.state.params.user,
-      page: 'checkin',
       events: null
     };
 
@@ -37,19 +40,13 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
-    const pages = {
-      'checkin': <CheckIn events={this.state.events} token={this.state.user.token} />,
-      'events': <Events events={this.state.events} />,
-      'profile': <Profile user={this.state.user} />
-    };
     return (
       <View>
-        <Text onPress={() => this.setPage('checkin')}>CheckIn</Text>
-        <Text onPress={() => this.setPage('events')}>Events</Text>
-        <Text onPress={() => this.setPage('profile')}>Profile</Text>
-
-        {pages[this.state.page]}
-        <Text onPress={() => this.props.navigation.navigate('SignOut')}>Sign Out</Text>
+        <CheckIn
+          events={this.state.events}
+          token={this.state.user.token}
+        />
+        <Events events={this.state.events} />
       </View>
     );
   }
