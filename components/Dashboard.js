@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { Header } from 'react-native-elements';
 
-import IP_ADDRESS from '../secrets.js';
+import styles from '../styles/styles.js';
 import BackendService from '../services/BackendService.js';
 import CheckIn from './CheckIn.js';
 import Events from './Events.js';
-import Profile from './Profile.js';
+import MenuToggle from './MenuToggle.js';
 
 export default class Dashboard extends React.Component {
   static navigationOptions = {
@@ -19,7 +20,7 @@ export default class Dashboard extends React.Component {
       events: null
     };
 
-    this.setPage = this.setPage.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
   componentDidMount() {
@@ -35,13 +36,18 @@ export default class Dashboard extends React.Component {
     }
   }
 
-  setPage(newPage) {
-    this.setState({ page: newPage });
+  toggleMenu() {
+    this.props.navigation.navigate('DrawerToggle');
   }
 
   render() {
     return (
       <View>
+        <Header
+          leftComponent={<MenuToggle onMenuPress={this.toggleMenu} />}
+          centerComponent={{ text: 'DASHBOARD', style: { color: '#fff' } }}
+          outerContainerStyles={styles.appHeader}
+        />
         <CheckIn
           events={this.state.events}
           token={this.state.user.token}

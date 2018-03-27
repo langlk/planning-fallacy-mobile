@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, StatusBar } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
@@ -48,7 +48,6 @@ export default class SignOut extends React.Component {
       <View style={styles.mainContainer}>
         <Text>Signing Out</Text>
         <ActivityIndicator />
-        <StatusBar barStyle="default" />
       </View>
     );
   }

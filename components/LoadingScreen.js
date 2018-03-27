@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, StatusBar, View } from 'react-native';
+import { ActivityIndicator, View } from 'react-native';
 
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
@@ -54,9 +54,10 @@ export default class LoadingScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator
+          size="large"
+        />
       </View>
     );
   }
