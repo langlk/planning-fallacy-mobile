@@ -54,7 +54,7 @@ export default class LoadingScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.loadingContainer}>
+      <View style={styles.centeredContainer}>
         <ActivityIndicator
           size="large"
         />

@@ -1,6 +1,8 @@
 import React from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, Button } from 'react-native';
+import { Input, Icon } from 'react-native-elements';
 
+import styles from '../styles/styles.js';
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
 
@@ -33,30 +35,80 @@ export default class SignUp extends React.Component {
 
   render() {
     return(
-      <View>
-        <Text>Sign Up</Text>
-        <TextInput
-          placeholder="Username"
-          onChangeText={(name) => this.setState({name})}
-        />
-        <TextInput
-          placeholder="Email"
-          onChangeText={(email) => this.setState({email})}
-        />
-        <TextInput
-          placeholder="Password"
-          secureTextEntry={true}
-          onChangeText={(password) => this.setState({password})}
-        />
-        <TextInput
-          placeholder="Password Confirmation"
-          secureTextEntry={true}
-          onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
-        />
-        <Button
-          title="Submit"
-          onPress={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation) }
-        />
+      <View style={styles.centeredContainer}>
+        <View style={styles.formContainer}>
+          <Text>Sign Up</Text>
+          <Input
+            containerStyle={styles.inputContainer}
+            placeholder="Username"
+            leftIcon={
+              <Icon
+                name='person'
+                size={24}
+                color='#aaa'
+              />
+            }
+            leftIconContainerStyle={{
+              width: styles.inputIcon.width
+            }}
+            placeholderTextColor='#aaa'
+            onChangeText={(name) => this.setState({name})}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            placeholder="Email"
+            leftIcon={
+              <Icon
+                name='email'
+                size={24}
+                color='#aaa'
+              />
+            }
+            leftIconContainerStyle={{
+              width: styles.inputIcon.width
+            }}
+            placeholderTextColor='#aaa'
+            onChangeText={(email) => this.setState({email})}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            placeholder="Password"
+            leftIcon={
+              <Icon
+                name='lock'
+                size={24}
+                color='#aaa'
+              />
+            }
+            leftIconContainerStyle={{
+              width: styles.inputIcon.width
+            }}
+            placeholderTextColor='#aaa'
+            secureTextEntry={true}
+            onChangeText={(password) => this.setState({password})}
+          />
+          <Input
+            containerStyle={styles.inputContainer}
+            placeholder="Password Confirmation"
+            leftIcon={
+              <Icon
+                name='lock'
+                size={24}
+                color='#aaa'
+              />
+            }
+            leftIconContainerStyle={{
+              width: styles.inputIcon.width
+            }}
+            placeholderTextColor='#aaa'
+            secureTextEntry={true}
+            onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
+          />
+          <Button
+            title="Submit"
+            onPress={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation) }
+          />
+        </View>
       </View>
     );
   }
