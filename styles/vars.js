@@ -6,6 +6,9 @@ const vars = {
   responsiveWidth: Dimensions.get('window').width,
   flex: 1,
   padding: 10,
+  borderRadius: 40,
+  inputHeight: 50,
+  appBackgroundColor: 'white',
   appPrimaryColor: '#000',
   appAccentColor: '#606060',
   appLightAccent: '#aaaaaa'

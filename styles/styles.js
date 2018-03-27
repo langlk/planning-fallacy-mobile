@@ -23,16 +23,36 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: vars.responsiveWidth - 60,
-    borderRadius: 40,
+    borderRadius: vars.borderRadius,
     borderWidth: 1,
     borderColor: vars.appLightAccent,
-    height: 50,
+    height: vars.inputHeight,
     marginVertical: 10,
     marginHorizontal: 30
   },
   inputIcon: {
     color: vars.appLightAccent,
     width: 50
+  },
+  button: {
+    width: vars.responsiveWidth - 60,
+    marginVertical: 10,
+    marginHorizontal: 30,
+    height: vars.inputHeight,
+    borderRadius: vars.borderRadius,
+    borderColor: vars.appLightAccent,
+    borderWidth: 1,
+    backgroundColor: vars.appBackgroundColor,
+    shadowColor: vars.appBackgroundColor,
+    shadowOpacity: 0,
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 0,
+    elevation: 0
+  },
+  buttonTitle: {
+    color: vars.appAccentColor,
+    fontWeight: 'normal',
+    fontSize: 18
   }
 });
 

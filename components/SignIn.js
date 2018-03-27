@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { Input, Icon } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Input, Icon, Button } from 'react-native-elements';
 
 import styles from '../styles/styles.js';
 import BackendService from '../services/BackendService.js';
@@ -71,6 +71,9 @@ export default class SignIn extends React.Component {
             onChangeText={(password) => this.setState({password})}
           />
           <Button
+            containerStyle={styles.buttonContainer}
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonTitle}
             onPress={() => this.signIn(this.state.email, this.state.password) }
             title="Submit"
           />
