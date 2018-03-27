@@ -6,6 +6,7 @@ const MenuToggle = (props) => {
     <Icon
       name="menu"
       color="#fff"
+      size={30}
       onPress={ () => props.onMenuPress() }
     />
   );
