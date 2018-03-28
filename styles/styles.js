@@ -5,8 +5,7 @@ import vars from './vars.js';
 
 const styles = StyleSheet.create({
   container: {
-    flex: vars.flex,
-    padding: vars.padding
+    flex: vars.flex
   },
   centeredContainer: {
     flex: vars.flex,
@@ -15,6 +14,10 @@ const styles = StyleSheet.create({
   formContainer: {
     alignItems: "stretch",
     paddingBottom: 50
+  },
+  contentContainer: {
+    padding: vars.padding,
+    paddingBottom: parseInt(vars.responsiveHeight / 6)
   },
   appHeader: {
     paddingTop: vars.responsivePaddingTop,
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: vars.appLightAccent,
     height: vars.inputHeight,
-    marginVertical: 10,
+    marginVertical: vars.padding,
     marginHorizontal: 30
   },
   inputIcon: {
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: vars.responsiveWidth - 60,
-    marginVertical: 10,
+    marginVertical: vars.padding,
     marginHorizontal: 30,
     height: vars.inputHeight,
     borderRadius: vars.borderRadius,
@@ -58,7 +61,19 @@ const styles = StyleSheet.create({
     fontSize: 34,
     fontWeight: 'normal',
     textAlign: 'center',
-    margin: 10
+    margin: vars.padding
+  },
+  header2: {
+    fontSize: 24,
+    fontWeight: 'normal',
+    textAlign: 'center',
+    marginVertical: vars.padding
+  },
+  header5: {
+    fontSize: 16,
+    fontWeight: 'normal',
+    textAlign: 'center',
+    marginVertical: vars.padding
   }
 });
 
