@@ -1,5 +1,8 @@
 import React from 'react';
-import { View, Text, Picker, Button } from 'react-native';
+import { View, Picker } from 'react-native';
+import { Button, Text } from 'react-native-elements';
+
+import styles from '../styles/styles.js';
 
 export default class CheckInForm extends React.Component {
   constructor(props) {
@@ -23,24 +26,30 @@ export default class CheckInForm extends React.Component {
         />
       );
     }) : null;
-
+    
     return events ? (
       <View>
-        <Text>CheckIn</Text>
-        <Picker
-          selectedValue={this.state.eventId}
-        >
-          {events}
-        </Picker>
+        <Text h2 style={styles.header2}>Check in to an Event</Text>
+        <View style={styles.pickerContainer}>
+          <Picker
+            selectedValue={this.state.eventId}
+          >
+            {events}
+          </Picker>
+        </View>
+
         <Button
+          containerStyle={styles.buttonContainer}
+          buttonStyle={styles.button}
+          titleStyle={styles.buttonTitle}
           onPress={() => this.props.onCheckIn(this.state.eventId) }
           title="Check In"
         />
       </View>
     ) : (
       <View>
-        <Text>CheckIn</Text>
-        <Text>No events to check into.</Text>
+        <Text h2 style={styles.header2}>Check in to an Event</Text>
+        <Text h5 style={styles.header5}>No events to check into.</Text>
       </View>
     );
   }

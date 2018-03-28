@@ -33,6 +33,16 @@ const styles = StyleSheet.create({
     marginVertical: vars.padding,
     marginHorizontal: 30
   },
+  pickerContainer: {
+    width: vars.responsiveWidth - 60,
+    borderRadius: vars.borderRadius,
+    borderWidth: 1,
+    borderColor: vars.appLightAccent,
+    height: vars.inputHeight,
+    marginVertical: vars.padding,
+    marginHorizontal: 30,
+    paddingHorizontal: vars.padding
+  },
   inputIcon: {
     color: vars.appLightAccent,
     width: 50
