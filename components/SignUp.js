@@ -39,7 +39,10 @@ export default class SignUp extends React.Component {
         <View style={styles.formContainer}>
           <Text h1 style={styles.header1}>Sign Up</Text>
           <Input
-            containerStyle={styles.inputContainer}
+            onChangeText={(name) => this.setState({name})}
+            ref={input => (this.nameInput = input)}
+            returnKeyType='next'
+            onSubmitEditing={() => {this.emailInput.focus()}}
             placeholder="Username"
             leftIcon={
               <Icon
@@ -48,14 +51,17 @@ export default class SignUp extends React.Component {
                 color='#aaa'
               />
             }
+            containerStyle={styles.inputContainer}
             leftIconContainerStyle={{
               width: styles.inputIcon.width
             }}
             placeholderTextColor='#aaa'
-            onChangeText={(name) => this.setState({name})}
           />
           <Input
-            containerStyle={styles.inputContainer}
+            onChangeText={(email) => this.setState({email})}
+            ref={input => (this.emailInput = input)}
+            returnKeyType='next'
+            onSubmitEditing={() => {this.passwordInput.focus()}}
             placeholder="Email"
             leftIcon={
               <Icon
@@ -64,14 +70,19 @@ export default class SignUp extends React.Component {
                 color='#aaa'
               />
             }
+            containerStyle={styles.inputContainer}
             leftIconContainerStyle={{
               width: styles.inputIcon.width
             }}
             placeholderTextColor='#aaa'
-            onChangeText={(email) => this.setState({email})}
+            autoCapitalize='none'
+            keyboardType='email-address'
           />
           <Input
-            containerStyle={styles.inputContainer}
+            onChangeText={(password) => this.setState({password})}
+            ref={input => (this.passwordInput = input)}
+            returnKeyType='next'
+            onSubmitEditing={() => {this.confirmationInput.focus()}}
             placeholder="Password"
             leftIcon={
               <Icon
@@ -80,15 +91,18 @@ export default class SignUp extends React.Component {
                 color='#aaa'
               />
             }
+            containerStyle={styles.inputContainer}
             leftIconContainerStyle={{
               width: styles.inputIcon.width
             }}
             placeholderTextColor='#aaa'
             secureTextEntry={true}
-            onChangeText={(password) => this.setState({password})}
           />
           <Input
-            containerStyle={styles.inputContainer}
+            onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
+            ref={input => (this.confirmationInput = input)}
+            returnKeyType='next'
+            onSubmitEditing={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation)}
             placeholder="Password Confirmation"
             leftIcon={
               <Icon
@@ -97,19 +111,19 @@ export default class SignUp extends React.Component {
                 color='#aaa'
               />
             }
+            containerStyle={styles.inputContainer}
             leftIconContainerStyle={{
               width: styles.inputIcon.width
             }}
             placeholderTextColor='#aaa'
             secureTextEntry={true}
-            onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
           />
           <Button
             containerStyle={styles.buttonContainer}
             buttonStyle={styles.button}
             title="Submit"
             titleStyle={styles.buttonTitle}
-            onPress={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation) }
+            onPress={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation)}
           />
         </View>
       </View>

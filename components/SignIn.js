@@ -62,7 +62,7 @@ export default class SignIn extends React.Component {
             onChangeText={(password) => this.setState({password})}
             ref={input => (this.passwordInput = input)}
             returnKeyType='done'
-            onSubmitEditing={ () => this.signIn(this.state.email, this.state.password) }
+            onSubmitEditing={() => this.signIn(this.state.email, this.state.password)}
             placeholder="Password"
             leftIcon={
               <Icon
@@ -79,7 +79,7 @@ export default class SignIn extends React.Component {
             secureTextEntry={true}
           />
           <Button
-            onPress={ () => this.signIn(this.state.email, this.state.password) }
+            onPress={() => this.signIn(this.state.email, this.state.password)}
             title="Submit"
             containerStyle={styles.buttonContainer}
             buttonStyle={styles.button}
