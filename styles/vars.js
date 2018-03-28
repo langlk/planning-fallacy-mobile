@@ -12,7 +12,9 @@ const vars = {
   appBackgroundColor: 'white',
   appPrimaryColor: '#000',
   appAccentColor: '#606060',
-  appLightAccent: '#aaaaaa'
+  appLightAccent: '#aaaaaa',
+  appLateColor: '#840000',
+  appEarlyColor: '#006006'
 };
 
 export default vars;
