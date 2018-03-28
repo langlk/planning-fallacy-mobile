@@ -42,7 +42,7 @@ export default class Dashboard extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Header
           leftComponent={<MenuToggle onMenuPress={this.toggleMenu} />}
           centerComponent={{ text: 'DASHBOARD', style: { color: '#fff' } }}

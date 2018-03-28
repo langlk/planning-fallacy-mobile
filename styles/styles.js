@@ -84,7 +84,26 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     textAlign: 'center',
     marginVertical: vars.padding
+  },
+  listContainer: {
+    width: vars.responsiveWidth - 60,
+    marginHorizontal: 30,
+    marginTop: 0,
+    borderColor: vars.appBackgroundColor
+  },
+  listItemContainer: {
+    borderBottomColor: vars.appBackgroundColor
+  },
+  listTitle: {
+    fontSize: 16,
+    color: vars.appPrimaryColor
+  },
+  listSubtitle: {
+    fontSize: 16,
+    fontWeight: 'normal',
+    color: vars.appAccentColor
   }
+
 });
 
 export default styles;

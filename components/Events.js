@@ -1,21 +1,61 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
+import { List, ListItem, Text } from 'react-native-elements';
+
+import styles from '../styles/styles.js';
 
 export default class Events extends React.Component {
+  timeString(event) {
+    const days = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
+    let eventDate = new Date(Date.parse(event.start.date_time || event.start.date));
+    let eventTimeString = event.start.date_time ? `${eventDate.getHours()}:${eventDate.getMinutes()} on` : "All day";
+    return `${eventTimeString} ${days[eventDate.getDay()]}`;
+  }
 
   render() {
     const events = this.props.events ? this.props.events.map((event) => {
       return (
-        <Text key={event.id}>{event.summary}</Text>
+        <ListItem
+          key={event.id}
+          title={event.summary}
+          subtitle={this.timeString(event)}
+          leftIcon={{
+            name: 'event',
+            color: '#606060'
+          }}
+          hideChevron={true}
+          containerStyle={styles.listItemContainer}
+          titleStyle={styles.listTitle}
+          subtitleStyle={styles.listSubtitle}
+        />
       );
     }) : (
-      <Text>Loading Events</Text>
+      <ListItem
+        title='Loading Events...'
+        leftIcon={{
+          name: 'sync',
+          color: '#606060'
+        }}
+        hideChevron={true}
+        containerStyle={styles.listItemContainer}
+        titleStyle={styles.listTitle}
+      />
     );
 
     return (
       <View>
-        <Text>Events</Text>
-        {events}
+        <Text h2 style={styles.header2}>Upcoming Events</Text>
+        <List containerStyle={styles.listContainer}>
+          {events}
+        </List>
       </View>
     );
   }
