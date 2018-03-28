@@ -53,6 +53,12 @@ const styles = StyleSheet.create({
     color: vars.appAccentColor,
     fontWeight: 'normal',
     fontSize: 18
+  },
+  header1: {
+    fontSize: 34,
+    fontWeight: 'normal',
+    textAlign: 'center',
+    margin: 10
   }
 });
 

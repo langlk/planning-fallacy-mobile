@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
-import { Input, Icon, Button } from 'react-native-elements';
+import { View } from 'react-native';
+import { Button, Icon, Input, Text } from 'react-native-elements';
 
 import styles from '../styles/styles.js';
 import BackendService from '../services/BackendService.js';
@@ -36,7 +36,7 @@ export default class SignIn extends React.Component {
     return(
       <View style={styles.centeredContainer}>
         <View style={styles.formContainer}>
-          <Text>Sign In</Text>
+          <Text h1 style={styles.header1}>Sign In</Text>
           <Input
             containerStyle={styles.inputContainer}
             placeholder="Email"
