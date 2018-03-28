@@ -38,7 +38,10 @@ export default class SignIn extends React.Component {
         <View style={styles.formContainer}>
           <Text h1 style={styles.header1}>Sign In</Text>
           <Input
-            containerStyle={styles.inputContainer}
+            onChangeText={(email) => this.setState({email})}
+            ref={input => (this.emailInput = input)}
+            returnKeyType='next'
+            onSubmitEditing={() => {this.passwordInput.focus()}}
             placeholder="Email"
             leftIcon={
               <Icon
@@ -47,14 +50,19 @@ export default class SignIn extends React.Component {
                 color='#aaa'
               />
             }
+            containerStyle={styles.inputContainer}
             leftIconContainerStyle={{
               width: styles.inputIcon.width
             }}
             placeholderTextColor='#aaa'
-            onChangeText={(email) => this.setState({email})}
+            autoCapitalize='none'
+            keyboardType='email-address'
           />
           <Input
-            containerStyle={styles.inputContainer}
+            onChangeText={(password) => this.setState({password})}
+            ref={input => (this.passwordInput = input)}
+            returnKeyType='done'
+            onSubmitEditing={ () => this.signIn(this.state.email, this.state.password) }
             placeholder="Password"
             leftIcon={
               <Icon
@@ -63,19 +71,19 @@ export default class SignIn extends React.Component {
                 color='#aaa'
               />
             }
+            containerStyle={styles.inputContainer}
             leftIconContainerStyle={{
               width: styles.inputIcon.width
             }}
             placeholderTextColor='#aaa'
             secureTextEntry={true}
-            onChangeText={(password) => this.setState({password})}
           />
           <Button
+            onPress={ () => this.signIn(this.state.email, this.state.password) }
+            title="Submit"
             containerStyle={styles.buttonContainer}
             buttonStyle={styles.button}
             titleStyle={styles.buttonTitle}
-            onPress={() => this.signIn(this.state.email, this.state.password) }
-            title="Submit"
           />
         </View>
       </View>
