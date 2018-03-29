@@ -35,8 +35,8 @@ export default class SignIn extends React.Component {
   }
 
   render() {
+    // Currently using this sol'n but will likely switch to android-specific option on eject.
     return(
-      // Currently using this sol'n but will likely switch to android-specific option on eject.
       <KeyboardAvoidingView
         keyboardVerticalOffset={0}
         behavior='padding'

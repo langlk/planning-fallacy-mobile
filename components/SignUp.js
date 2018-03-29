@@ -35,6 +35,7 @@ export default class SignUp extends React.Component {
     this.keyboardHideListener.remove();
   }
 
+  // Currently using this sol'n but will likely switch to android-specific option on eject.
   inputFocused(inputName) {
     this.formFocused = true;
     const heights = {
@@ -72,7 +73,6 @@ export default class SignUp extends React.Component {
   render() {
     return(
       <View style={styles.centeredContainer}>
-        // Currently using this sol'n but will likely switch to android-specific option on eject.
         <ScrollView
           ref="scrollView"
           scrollEnabled={false}
