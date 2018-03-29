@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { KeyboardAvoidingView, View } from 'react-native';
 import { Button, Icon, Input, Text } from 'react-native-elements';
 
 import styles from '../styles/styles.js';
@@ -34,8 +34,14 @@ export default class SignIn extends React.Component {
 
   render() {
     return(
-      <View style={styles.centeredContainer}>
-        <View style={styles.formContainer}>
+      // Currently using this sol'n but will likely switch to android-specific option on eject.
+      <KeyboardAvoidingView
+        keyboardVerticalOffset={0}
+        behavior='padding'
+        style={styles.centeredContainer}
+      >
+        <View
+          style={styles.formContainer}>
           <Text h1 style={styles.header1}>Sign In</Text>
           <Input
             onChangeText={(email) => this.setState({email})}
@@ -86,7 +92,7 @@ export default class SignIn extends React.Component {
             titleStyle={styles.buttonTitle}
           />
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
