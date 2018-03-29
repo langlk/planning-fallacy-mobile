@@ -15,7 +15,8 @@ export default class SignIn extends React.Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      signingIn: false
     };
 
     this.signIn = this.signIn.bind(this);
@@ -23,6 +24,7 @@ export default class SignIn extends React.Component {
 
   async signIn(email, password) {
     try {
+      await this.setState({ signingIn: true });
       let user = await BackendService.signIn(email, password);
       await StorageService.setUser(user);
       let routeName = user.has_account ? 'Dashboard' : 'LinkAccount';

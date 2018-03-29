@@ -4,8 +4,9 @@ import { ActivityIndicator, View } from 'react-native';
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
 import styles from '../styles/styles.js';
+import LoadingDisplay from './LoadingDisplay.js';
 
-export default class LoadingScreen extends React.Component {
+export default class UserLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -54,10 +55,8 @@ export default class LoadingScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.centeredContainer}>
-        <ActivityIndicator
-          size="large"
-        />
+      <View style={styles.container}>
+        <LoadingDisplay text="Checking for user data" />
       </View>
     );
   }

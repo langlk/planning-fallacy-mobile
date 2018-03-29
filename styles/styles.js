@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: vars.padding
   },
+  loadingHeader: {
+    fontSize: 24,
+    fontWeight: 'normal',
+    textAlign: 'center',
+    marginVertical: vars.padding  * 2
+  },
   listContainer: {
     width: vars.responsiveWidth - 60,
     marginHorizontal: 30,
@@ -107,7 +113,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: vars.appAccentColor
   }
-
 });
 
 export default styles;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { SwitchNavigator } from 'react-navigation';
 
-import LoadingScreen from './components/LoadingScreen.js';
+import UserLoadingScreen from './components/UserLoadingScreen.js';
 import LoggedOut from './components/LoggedOut.js';
 import LoggedIn from './components/LoggedIn.js';
 
 export default SwitchNavigator(
   {
-    Loading: LoadingScreen,
+    Loading: UserLoadingScreen,
     App: LoggedIn,
     Auth: LoggedOut
   },
