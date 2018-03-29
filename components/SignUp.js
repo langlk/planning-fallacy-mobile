@@ -77,7 +77,7 @@ export default class SignUp extends React.Component {
           ref="scrollView"
           scrollEnabled={false}
         >
-          <View style={{paddingBottom: 250}}>
+          <View style={styles.signUpContainer}>
             <Text h1 style={styles.header1}>Sign Up</Text>
             <Input
               ref={input => (this.nameInput = input)}

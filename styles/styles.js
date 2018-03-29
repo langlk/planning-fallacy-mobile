@@ -19,6 +19,10 @@ const styles = StyleSheet.create({
     padding: vars.padding,
     paddingBottom: parseInt(vars.responsiveHeight / 6)
   },
+  signUpContainer: {
+    paddingBottom: 250,
+    paddingTop: 15
+  },
   appHeader: {
     paddingTop: vars.responsivePaddingTop,
     height: 70,
