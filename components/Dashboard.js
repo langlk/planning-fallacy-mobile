@@ -7,6 +7,7 @@ import BackendService from '../services/BackendService.js';
 import CheckIn from './CheckIn.js';
 import Events from './Events.js';
 import MenuToggle from './MenuToggle.js';
+import LoadingDisplay from './LoadingDisplay';
 
 export default class Dashboard extends React.Component {
   static navigationOptions = {
@@ -17,7 +18,8 @@ export default class Dashboard extends React.Component {
     super(props);
     this.state = {
       user: this.props.navigation.state.params.user,
-      events: null
+      events: null,
+      eventsLoading: true
     };
 
     this.toggleMenu = this.toggleMenu.bind(this);
@@ -30,9 +32,13 @@ export default class Dashboard extends React.Component {
   async getEvents(token) {
     try {
       let response = await BackendService.getEvents(token);
-      this.setState({ events: response.events });
+      this.setState({
+        events: response.events,
+        eventsLoading: false
+      });
     } catch (error) {
       console.log(error);
+      this.setState({ eventsLoading: false });
     }
   }
 
@@ -41,6 +47,20 @@ export default class Dashboard extends React.Component {
   }
 
   render() {
+    const content = this.state.eventsLoading ? (
+      <View style={styles.centeredContainer}>
+        <LoadingDisplay text="Loading Your Events" />
+      </View>
+    ) : (
+      <View>
+        <CheckIn
+          events={this.state.events}
+          token={this.state.user.token}
+        />
+        <Events events={this.state.events} />
+      </View>
+    );
+
     return (
       <View style={styles.container}>
         <Header
@@ -48,11 +68,7 @@ export default class Dashboard extends React.Component {
           centerComponent={{ text: 'DASHBOARD', style: { color: '#fff' } }}
           outerContainerStyles={styles.appHeader}
         />
-        <CheckIn
-          events={this.state.events}
-          token={this.state.user.token}
-        />
-        <Events events={this.state.events} />
+        {content}
       </View>
     );
   }

@@ -39,11 +39,7 @@ export default class Events extends React.Component {
       );
     }) : (
       <ListItem
-        title='Loading Events...'
-        leftIcon={{
-          name: 'sync',
-          color: '#606060'
-        }}
+        title='No Upcoming Events Found'
         hideChevron={true}
         containerStyle={styles.listItemContainer}
         titleStyle={styles.listTitle}

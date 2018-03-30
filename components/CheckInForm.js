@@ -33,6 +33,7 @@ export default class CheckInForm extends React.Component {
     } else if (this.props.checkInMessage) {
       notification = <Text style={styles.successText}>{this.props.checkInMessage}</Text>;
     }
+    
     return events ? (
       <View>
         <Text h2 style={styles.header2}>Check in to an Event</Text>
