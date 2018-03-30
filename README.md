@@ -1,16 +1,16 @@
 # Planning Fallacy Mobile
 
-### _Epicodus Project in React Native, January 10, 2018_
+### _Epicodus Project in React Native, March 30, 2018_
 
 ### By Kelsey Langlois
 
 ## Description
 
-_This is an app to help people compensate for the Planning Fallacy. It uses a user's Google Calendar to gather their events, and allows them to see upcoming events and check in when they arrive at a given event. The data from these checkins is used to track how late, on average, a user is to events._
+This is an app to help people compensate for the Planning Fallacy. It uses a user's Google Calendar to gather their events, and allows them to see upcoming events and check in when they arrive at a given event. The data from these checkins is used to track how late, on average, a user is to events. Uses the Rails backend from [langlk/planning_fallacy](http://github.com/langlk/planning_fallacy).
 
 ## Installation and Setup
 
-_At present, to run this project, you must have the accompanying Rails App served on localhost. It is available to clone at [langlk/planning_fallacy](https://github.com/langlk/planning_fallacy), with instructions for setup in the project README._
+_You can get this app via Expo at [expo.io/@langlk/planning-fallacy](https://expo.io/@langlk/planning-fallacy). To install on your own machine, follow the following steps:_
 
 * Clone this repository.
 * Run the following commands in the project root directory:
