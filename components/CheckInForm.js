@@ -26,10 +26,17 @@ export default class CheckInForm extends React.Component {
         />
       );
     }) : null;
-    
+
+    let notification = null;
+    if (this.props.checkInError) {
+      notification = <Text style={styles.errorText}>{this.props.checkInError}</Text>;
+    } else if (this.props.checkInMessage) {
+      notification = <Text style={styles.successText}>{this.props.checkInMessage}</Text>;
+    }
     return events ? (
       <View>
         <Text h2 style={styles.header2}>Check in to an Event</Text>
+        {notification}
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={this.state.eventId}

@@ -57,10 +57,8 @@ export default class BackendService {
         Authorization: `Token ${token}`
       },
     });
-    if (response.status !== 200) {
-      let responseJson = await response.json();
-      this.throwException(status, responseJson);
-    }
+    let responseJson = await response.json();
+    return responseJson;
   }
 
   static async clearSession(token) {

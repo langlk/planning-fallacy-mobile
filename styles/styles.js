@@ -99,6 +99,10 @@ const styles = StyleSheet.create({
     color: vars.appLateColor,
     textAlign: 'center'
   },
+  successText: {
+    color: vars.appEarlyColor,
+    textAlign: 'center'
+  },
   listContainer: {
     width: vars.responsiveWidth - 60,
     marginHorizontal: 30,
