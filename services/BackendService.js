@@ -21,11 +21,7 @@ export default class BackendService {
       method: 'POST'
     });
     let responseJson = await response.json();
-    if (response.status === 200) {
-      return responseJson;
-    } else {
-      this.throwException(response.status, responseJson);
-    }
+    return responseJson;
   }
 
   static async getUser(token) {
@@ -86,9 +82,15 @@ export default class BackendService {
 
   static throwException(status, responseJson) {
     let message = `API Error Code: ${status}`;
+    message += this.getErrorMessage(responseJson)
+    throw message;
+  }
+
+  static getErrorMessage(responseJson) {
+    let message = '';
     responseJson.errors.forEach((error) => {
       message += `\n${error.detail}`;
     });
-    throw message;
+    return message;
   }
 }

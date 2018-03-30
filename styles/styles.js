@@ -95,6 +95,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: vars.padding  * 2
   },
+  errorText: {
+    color: vars.appLateColor,
+    textAlign: 'center'
+  },
   listContainer: {
     width: vars.responsiveWidth - 60,
     marginHorizontal: 30,

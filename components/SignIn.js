@@ -16,7 +16,8 @@ export default class SignIn extends React.Component {
     this.state = {
       email: "",
       password: "",
-      signingIn: false
+      signingIn: false,
+      errorMessage: null
     };
 
     this.signIn = this.signIn.bind(this);
@@ -24,13 +25,26 @@ export default class SignIn extends React.Component {
 
   async signIn(email, password) {
     try {
-      await this.setState({ signingIn: true });
+      await this.setState({
+        signingIn: true,
+        errorMessage: null
+      });
       let user = await BackendService.signIn(email, password);
-      await StorageService.setUser(user);
-      let routeName = user.has_account ? 'Dashboard' : 'LinkAccount';
-      this.props.navigation.navigate(routeName, { user: user });
+      if (user.errors == null) {
+        await StorageService.setUser(user);
+        let routeName = user.has_account ? 'Dashboard' : 'LinkAccount';
+        this.props.navigation.navigate(routeName, { user: user });
+      } else {
+        this.setState({
+          signingIn: false,
+          errorMessage: user.errors.length > 0 ? user.errors[0].detail : "Something went wrong"
+        });
+      }
     } catch (error) {
-      console.log(error);
+      this.setState({
+        signingIn: false,
+        errorMessage: error.message
+      });
     }
   }
 
@@ -45,6 +59,7 @@ export default class SignIn extends React.Component {
         <View
           style={styles.formContainer}>
           <Text h1 style={styles.header1}>Sign In</Text>
+          <Text style={styles.errorText}>{this.state.errorMessage}</Text>
           <Input
             onChangeText={(email) => this.setState({email})}
             ref={input => (this.emailInput = input)}
