@@ -1,6 +1,11 @@
 {
   "expo": {
     "sdkVersion": "23.0.0",
-    "scheme": "pfall"
+    "scheme": "pfall",
+    "name": "Planning Fallacy",
+    "privacy": "public",
+    "slug": "planning-fallacy",
+    "description": "An app to help people compensate for the human tendency to underestimate travel time. Built in React Native as an accompaniment to the Planning Fallacy web app at planning-fallacy.herokuapp.com.",
+    "githubUrl": "https://github.com/langlk/planning-fallacy-mobile"
   }
 }
