@@ -43,7 +43,7 @@ export default class SignIn extends React.Component {
     } catch (error) {
       this.setState({
         signingIn: false,
-        errorMessage: error.message
+        errorMessage: error.message || "Something went wrong"
       });
     }
   }

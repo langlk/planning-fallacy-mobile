@@ -18,6 +18,8 @@ export default class SignUp extends React.Component {
       email: "",
       password: "",
       passwordConfirmation: "",
+      signingUp: false,
+      errorMessage: null
     };
     this.formFocused = false;
 
@@ -60,13 +62,41 @@ export default class SignUp extends React.Component {
     }
   }
 
+  checkValues() {
+    const vals = ['name', 'email', 'password', 'passwordConfirmation'];
+    const names = ['Username', 'Email', 'Password', 'Password confirmation'];
+    for (let i = 0; i < vals.length; i++) {
+      if (this.state[vals[i]].length == 0) {
+        throw `${names[i]} cannot be blank`;
+      }
+    }
+    if (this.state.password != this.state.passwordConfirmation) {
+      throw "Password and confirmation must match";
+    }
+  }
+
   async signUp(name, email, password, passwordConfirmation) {
     try {
-      let response = await BackendService.signUp(name, email, password, passwordConfirmation);
-      await StorageService.setUser(response);
-      this.props.navigation.navigate('LinkAccount', { user: response });
+      await this.setState({
+        signingUp: true,
+        errorMessage: null
+      });
+      this.checkValues();
+      let user = await BackendService.signUp(name, email, password, passwordConfirmation);
+      if (user.errors == null) {
+        await StorageService.setUser(user);
+        this.props.navigation.navigate('LinkAccount', { user: user });
+      } else {
+        this.setState({
+          signingUp: false,
+          errorMessage: user.errors.length > 0 ? user.errors[0].detail : "Something went wrong"
+        });
+      }
     } catch (error) {
-      console.log(error);
+      this.setState({
+        signingIn: false,
+        errorMessage: error.message || error
+      });
     }
   }
 
@@ -79,6 +109,7 @@ export default class SignUp extends React.Component {
         >
           <View style={styles.signUpContainer}>
             <Text h1 style={styles.header1}>Sign Up</Text>
+            <Text style={styles.errorText}>{this.state.errorMessage}</Text>
             <Input
               ref={input => (this.nameInput = input)}
               onFocus={() => this.inputFocused('name')}
