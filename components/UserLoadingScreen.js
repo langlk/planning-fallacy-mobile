@@ -15,6 +15,10 @@ export default class UserLoadingScreen extends React.Component {
     this.authenticate();
   }
 
+  componentWillUpdate() {
+    this.authenticate();
+  }
+
   async authenticate() {
     let user = await this.getUser();
     if (user !== null) {

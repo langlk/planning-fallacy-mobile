@@ -1,6 +1,6 @@
 import React from 'react';
 
-const API_ADDRESS = 'https://planningfallacy.herokuapp.com'
+const API_ADDRESS = 'https://planning-fallacy.herokuapp.com'
 
 export default class BackendService {
 

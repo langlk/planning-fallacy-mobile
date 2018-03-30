@@ -5,7 +5,7 @@ import { Button, Header, Text } from 'react-native-elements';
 import styles from '../styles/styles.js';
 import MenuToggle from './MenuToggle.js';
 
-const API_ADDRESS = 'https://planningfallacy.herokuapp.com';
+const API_ADDRESS = 'https://planning-fallacy.herokuapp.com';
 
 export default class LinkAccount extends React.Component {
   static navigationOptions = {
@@ -38,7 +38,7 @@ export default class LinkAccount extends React.Component {
             </Text>
 
             <Text h5 style={styles.header5}>
-              This app uses your Google Calendar to track when and where your events are happening. You'll need to link your Google account through the Planning Fallacy site.
+              This app uses your Google Calendar to track when and where your events are happening. You'll need to link your Google account through the Planning Fallacy site, then return to this app. If you've already linked your account, you can refresh it below.
             </Text>
 
             <Button
@@ -46,6 +46,13 @@ export default class LinkAccount extends React.Component {
               buttonStyle={styles.button}
               titleStyle={styles.buttonTitle}
               onPress={() => Linking.openURL(`${API_ADDRESS}?token=${user.token}`)}
+            />
+
+            <Button
+              title='Refresh Account'
+              buttonStyle={styles.button}
+              titleStyle={styles.buttonTitle}
+              onPress={() => this.props.navigation.navigate('Loading')}
             />
           </View>
         </View>
