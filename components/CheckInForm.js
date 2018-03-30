@@ -3,11 +3,12 @@ import { View, Picker } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 
 import styles from '../styles/styles.js';
+import LoadingDisplay from './LoadingDisplay.js';
 
 export default class CheckInForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { eventId: null };
+    this.state = { eventId: props.events && props.events.length > 0 ? props.events[0].id : null };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,8 +34,8 @@ export default class CheckInForm extends React.Component {
     } else if (this.props.checkInMessage) {
       notification = <Text style={styles.successText}>{this.props.checkInMessage}</Text>;
     }
-    
-    return events ? (
+
+    const content = events ? (
       <View>
         <Text h2 style={styles.header2}>Check in to an Event</Text>
         {notification}
@@ -60,5 +61,11 @@ export default class CheckInForm extends React.Component {
         <Text h5 style={styles.header5}>No events to check into.</Text>
       </View>
     );
+
+    return this.props.checkInLoading ? (
+      <View style={styles.partialContainer}>
+        <LoadingDisplay text="Checking In" />
+      </View>
+    ) : content;
   }
 }

@@ -23,6 +23,10 @@ const styles = StyleSheet.create({
     paddingBottom: 250,
     paddingTop: 15
   },
+  partialContainer: {
+    paddingTop: vars.responsivePaddingTop + 50,
+    paddingBottom: 50
+  },
   appHeader: {
     paddingTop: vars.responsivePaddingTop,
     height: 70,
