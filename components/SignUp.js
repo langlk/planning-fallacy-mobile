@@ -185,7 +185,7 @@ export default class SignUp extends React.Component {
               onFocus={() => this.inputFocused('passwordConfirmation')}
               onChangeText={(passwordConfirmation) => this.setState({passwordConfirmation})}
               ref={input => (this.confirmationInput = input)}
-              returnKeyType='next'
+              returnKeyType='done'
               onSubmitEditing={() => this.signUp(this.state.name, this.state.email, this.state.password, this.state.passwordConfirmation)}
               onBlur={() => this.inputBlurred()}
               placeholder="Password Confirmation"
