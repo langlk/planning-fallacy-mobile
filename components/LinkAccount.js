@@ -2,9 +2,10 @@ import React from 'react';
 import { View, Linking } from 'react-native';
 import { Button, Header, Text } from 'react-native-elements';
 
-import IP_ADDRESS from '../secrets.js';
 import styles from '../styles/styles.js';
 import MenuToggle from './MenuToggle.js';
+
+const API_ADDRESS = 'https://planningfallacy.herokuapp.com';
 
 export default class LinkAccount extends React.Component {
   static navigationOptions = {
@@ -44,7 +45,7 @@ export default class LinkAccount extends React.Component {
               title='Link Google Calendar'
               buttonStyle={styles.button}
               titleStyle={styles.buttonTitle}
-              onPress={() => Linking.openURL(`http://${IP_ADDRESS}:3000?token=${user.token}`)}
+              onPress={() => Linking.openURL(`${API_ADDRESS}?token=${user.token}`)}
             />
           </View>
         </View>

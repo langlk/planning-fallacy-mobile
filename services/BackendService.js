@@ -1,11 +1,11 @@
 import React from 'react';
 
-import IP_ADDRESS from '../secrets.js';
+const API_ADDRESS = 'https://planningfallacy.herokuapp.com'
 
 export default class BackendService {
 
   static async signUp(name, email, password, passwordConfirmation) {
-    let response = await fetch(`http://${IP_ADDRESS}:300/api/v1/signup?name=${name}&email=${email}&password=${password}&password_confirmation=${passwordConfirmation}`, {
+    let response = await fetch(`${API_ADDRESS}/api/v1/signup?name=${name}&email=${email}&password=${password}&password_confirmation=${passwordConfirmation}`, {
       method: 'POST'
     });
     let responseJson = await response.json();
@@ -13,7 +13,7 @@ export default class BackendService {
   }
 
   static async signIn(email, password) {
-    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signin?email=${email}&password=${password}`, {
+    let response = await fetch(`${API_ADDRESS}/api/v1/signin?email=${email}&password=${password}`, {
       method: 'POST'
     });
     let responseJson = await response.json();
@@ -21,7 +21,7 @@ export default class BackendService {
   }
 
   static async getUser(token) {
-    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/user`, {
+    let response = await fetch(`${API_ADDRESS}/api/v1/user`, {
       method: 'GET',
       headers: {
         Authorization: `Token ${token}`
@@ -36,7 +36,7 @@ export default class BackendService {
   }
 
   static async getEvents(token) {
-    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/events`, {
+    let response = await fetch(`${API_ADDRESS}/api/v1/events`, {
       method: 'GET',
       headers: {
         Authorization: `Token ${token}`
@@ -51,7 +51,7 @@ export default class BackendService {
   }
 
   static async checkIn(token, eventId) {
-    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/checkins?event_id=${eventId}`, {
+    let response = await fetch(`${API_ADDRESS}/api/v1/checkins?event_id=${eventId}`, {
       method: 'POST',
       headers: {
         Authorization: `Token ${token}`
@@ -64,7 +64,7 @@ export default class BackendService {
   }
 
   static async clearSession(token) {
-    let response = await fetch(`http://${IP_ADDRESS}:3000/api/v1/signout`, {
+    let response = await fetch(`${API_ADDRESS}/api/v1/signout`, {
       method: 'DELETE',
       headers: {
         Authorization: `Token ${token}`
