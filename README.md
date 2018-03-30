@@ -31,6 +31,8 @@ _You can get this app on Android via Expo at [expo.io/@langlk/planning-fallacy](
 ## Known Bugs:
 
 * Users can check in to events more than once.
+* Signup form inputs take two taps to switch between. There's a known fix for Android, but it requires ejecting the app. For now, navigating between inputs with the keyboard is recommended.
+* User offline access does not currently differentiate between lack of internet and the API denying access. A fix is in the works.
 
 ## Planned Functionality:
 
