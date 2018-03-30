@@ -4,6 +4,7 @@ import { View, Text, ActivityIndicator } from 'react-native';
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
 import styles from '../styles/styles.js';
+import LoadingDisplay from './LoadingDisplay.js';
 
 export default class SignOut extends React.Component {
   static navigationOptions = {
@@ -45,9 +46,8 @@ export default class SignOut extends React.Component {
 
   render() {
     return (
-      <View style={styles.mainContainer}>
-        <Text>Signing Out</Text>
-        <ActivityIndicator />
+      <View style={styles.centeredContainer}>
+        <LoadingDisplay text="Signing out" />
       </View>
     );
   }
