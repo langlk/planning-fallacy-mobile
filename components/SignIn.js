@@ -5,6 +5,7 @@ import { Button, Icon, Input, Text } from 'react-native-elements';
 import styles from '../styles/styles.js';
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
+import LoadingDisplay from './LoadingDisplay';
 
 export default class SignIn extends React.Component {
   static navigationOptions = {
@@ -50,7 +51,11 @@ export default class SignIn extends React.Component {
 
   render() {
     // Currently using this sol'n but will likely switch to android-specific option on eject.
-    return(
+    const content = this.state.signingIn ? (
+      <View style={styles.centeredContainer}>
+        <LoadingDisplay text="Signing In" />
+      </View>
+    ) : (
       <KeyboardAvoidingView
         keyboardVerticalOffset={0}
         behavior='padding'
@@ -111,5 +116,7 @@ export default class SignIn extends React.Component {
         </View>
       </KeyboardAvoidingView>
     );
+
+    return content;
   }
 }
