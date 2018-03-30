@@ -10,7 +10,7 @@ This is an app to help people compensate for the Planning Fallacy. It uses a use
 
 ## Installation and Setup
 
-_You can get this app via Expo at [expo.io/@langlk/planning-fallacy](https://expo.io/@langlk/planning-fallacy). To install on your own machine, follow the following steps:_
+_You can get this app on Android via Expo at [expo.io/@langlk/planning-fallacy](https://expo.io/@langlk/planning-fallacy). To install on your own machine, follow the following steps:_
 
 * Clone this repository.
 * Run the following commands in the project root directory:
@@ -22,13 +22,21 @@ _You can get this app via Expo at [expo.io/@langlk/planning-fallacy](https://exp
 * Ensure you have the [Expo App](https://expo.io/tools#client) on your phone.
 * Scan the QR code that appears on the command line using Expo. The project should load on your phone.
 
-## TODO:
-  * Connect to Rails API to allow user to sign up, in, and out
-  * Add display of upcoming events
-  * Add checkin function
-  * Integrate location services
-  * Integrate Google Directions to get departure time recommendation
-  * Add push notifications to let a user know when to leave
+## Specifications:
+
+* Allows user to sign up for a Planning Fallacy account or sign in to an existing account.
+* Directs user to Planning Fallacy site to connect their Google account.
+* Allows a user to view and check in to their events when they have linked their Google Calendar.
+
+## Known Bugs:
+
+* Users can check in to events more than once.
+
+## Planned Functionality:
+
+* Integrate location services
+* Integrate Google Directions to get departure time recommendation
+* Add push notifications to let a user know when to leave
 
 ## Support and contact details
 
@@ -37,6 +45,8 @@ _Please contact [kels.langlois@gmail.com](mailto:kels.langlois@gmail.com) with q
 ## Technologies Used
 
 * React Native
+* React Native Elements
+* Expo
 
 _This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app). You can find information on using it [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md)._
 
