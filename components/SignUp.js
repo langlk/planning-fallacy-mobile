@@ -5,6 +5,7 @@ import { Button, Icon, Input, Text } from 'react-native-elements';
 import styles from '../styles/styles.js';
 import BackendService from '../services/BackendService.js';
 import StorageService from '../services/StorageService.js';
+import LoadingDisplay from './LoadingDisplay.js';
 
 export default class SignUp extends React.Component {
   static navigationOptions =  {
@@ -94,14 +95,18 @@ export default class SignUp extends React.Component {
       }
     } catch (error) {
       this.setState({
-        signingIn: false,
+        signingUp: false,
         errorMessage: error.message || error
       });
     }
   }
 
   render() {
-    return(
+    const content = this.state.signingUp ? (
+      <View style={styles.centeredContainer}>
+        <LoadingDisplay text="Signing Up" />
+      </View>
+    ) : (
       <View style={styles.centeredContainer}>
         <ScrollView
           ref="scrollView"
@@ -209,5 +214,6 @@ export default class SignUp extends React.Component {
         </ScrollView>
       </View>
     );
+    return content;
   }
 }
