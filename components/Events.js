@@ -16,7 +16,7 @@ export default class Events extends React.Component {
       'Saturday'
     ];
     let eventDate = new Date(Date.parse(event.start.date_time || event.start.date));
-    let eventTimeString = event.start.date_time ? `${eventDate.getHours()}:${eventDate.getMinutes()} on` : "All day";
+    let eventTimeString = event.start.date_time ? `${eventDate.getHours()}:${eventDate.getMinutes() == 0 ? '00' : eventDate.getMinutes()} on` : "All day";
     return `${eventTimeString} ${days[eventDate.getDay()]}`;
   }
 
