@@ -11,11 +11,11 @@ export default class CheckInForm extends React.Component {
     this.state = { eventId: props.events && props.events.length > 0 ? props.events[0].id : null };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.events && nextProps.events.length > 0) {
-      this.setState({ eventId: nextProps.events[0].id });
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.events && nextProps.events.length > 0) {
+  //     this.setState({ eventId: nextProps.events[0].id });
+  //   }
+  // }
 
   render() {
     const events = this.props.events ? this.props.events.map((event) => {
@@ -42,6 +42,7 @@ export default class CheckInForm extends React.Component {
         <View style={styles.pickerContainer}>
           <Picker
             selectedValue={this.state.eventId}
+            onValueChange={(itemValue, itemIndex) => this.setState({eventId: itemValue})}
           >
             {events}
           </Picker>
